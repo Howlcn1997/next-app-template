@@ -1,30 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# readme
 
-## Getting Started
+vscode用户使用前请先安装`prettier`并保证代码规范性
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
+
+## 版本发布规范
+
+[semver.org](https://semver.org/lang/zh-CN/)
+
+
+## Git Commit Message 规范
+
+提交commit代码格式：
+
+```
+git commit -m <type>[optional scope]: <description>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+type ：用于表明我们这次提交的改动类型，是新增了功能？还是修改了测试代码？又或者是更新了文档？总结以下 11 种类型：
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交
+- ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交
+- docs：文档更新
+- feat：新增功能
+- fix：bug 修复
+- perf：性能优化
+- refactor：重构代码(既没有新增功能，也没有修复 bug)
+- style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等)
+- test：新增测试用例或是更新现有测试
+- revert：回滚某个更早之前的提交
+- chore：不属于以上类型的其他类型(日常事务)
 
-## Learn More
+optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。
 
-To learn more about Next.js, take a look at the following resources:
+description：一句话描述此次提交的主要内容，做到言简意赅。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## 样式规范
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> 项目已配置CSS Module
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+使用方式
+
+```
+├── index
+     ├── index.js
+     └── index.module.less
+```
+
+```jsx
+// index.js
+import STYLES form "./index.module.less"
+export default () => {
+    return <div className={STYLES.wrap}>WRAP</div>
+}
+```
+
+```scss
+// index.module.less
+.wrap {
+    background-color: skyblue
+}
+```
+
