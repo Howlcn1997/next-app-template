@@ -9,7 +9,8 @@
           "@/pages": "./pages",
           "@/public": "./public",
           "@/request": "./src/utils/request",
-          "@/components": "./src/components"
+          "@/components": "./src/components",
+          "@/pageCom": "./src/components/_pageComponents"
         }
       }
     ],

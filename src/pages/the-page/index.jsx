@@ -1,16 +1,22 @@
 import React from 'react';
+import { Affix, Button } from 'antd';
 import request from '@/request';
-
 import STYLES from './index.module.less';
 
 export default function TestPage(props) {
   return (
     <div
       className={STYLES.wrap}
-      onClick={() => {
-        request.get('/font/font-category/web-most-category-list/', { site_type: 'web' }).then(res => console.log(res));
-      }}>
-      This is a Testing Page
+      // onClick={() => {
+      //   request.get('/font/font-category/web-most-category-list/', { site_type: 'web' }).then(res => console.log(res));
+      // }}
+    >
+      <Affix>
+        <nav className={STYLES.nav}>nav</nav>
+      </Affix>
+      <div style={{ height: '1200px' }}>
+        <Button type="primary">xxxxx</Button>
+      </div>
     </div>
   );
 }
