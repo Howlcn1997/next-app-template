@@ -2,11 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/src/*": ["./src/*"],
-      "@/pages/*": ["./pages/*"],
-      "@/public/*": ["./public/*"],
-      "@/request/*": ["./src/utils/request/*"],
-      "@/components/*": ["./src/components/*"]
+      "@/src/*": ["src/*"],
+      "@/pages/*": ["pages/*"],
+      "@/public/*": ["public/*"],
+      "@/request/*": ["src/utils/request/*"],
+      "@/components/*": ["src/components/*"]
     }
   },
   "exclude": ["node_modules", "_next", "_next_dev"]
