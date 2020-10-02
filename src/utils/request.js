@@ -22,7 +22,7 @@ const HOST = getHost();
  * @param {Object} query 请求参数
  * @param {string} responseType json: 处理json数据，text：处理text类型数据（.html）
  */
-const baseRequest = (url, query, responseType = 'json') => {
+const _baseRequest = (url, query, responseType = 'json') => {
   return new Promise(function (resolve, reject) {
     isomorphicFetch(url, query)
       .then(async response => {
@@ -44,10 +44,10 @@ const baseRequest = (url, query, responseType = 'json') => {
   });
 };
 
-const request = {};
+const request = _baseRequest.bind(null);
 
 // JSON POST
-request.post = (url, params = {}, ...rest) => baseRequest(HOST + url, { ...defaultQuery, body: JSON.stringify(params) }, ...rest);
+request.post = (url, params = {}, ...rest) => _baseRequest(HOST + url, { ...defaultQuery, body: JSON.stringify(params) }, ...rest);
 
 // JSON GET
 request.get = (url, params = {}, ...rest) => {
@@ -56,13 +56,13 @@ request.get = (url, params = {}, ...rest) => {
       return key + '=' + params[key];
     })
     .join('&');
-  return baseRequest(HOST + url + (_query ? '/?' + _query : ''), { ...defaultQuery, method: 'GET' }, ...rest);
+  return _baseRequest(HOST + url + (_query ? '/?' + _query : ''), { ...defaultQuery, method: 'GET' }, ...rest);
 };
 
 // FORM POST
 request.form = (url, form, ...rest) => {
   const _data = new FormData(form);
-  return baseRequest(HOST + url, { ...defaultQuery, body: _data }, ...rest);
+  return _baseRequest(HOST + url, { ...defaultQuery, body: _data }, ...rest);
 };
 // 使用示例
 // var form = document.querySelector('form')
@@ -75,12 +75,11 @@ request.file = (url, { file, params = {} }) => {
   Object.keys(params).forEach(key => {
     data.append(key, params[key]);
   });
-  return baseRequest(HOST + url, { ...defaultQuery, body: _data });
+  return _baseRequest(HOST + url, { ...defaultQuery, body: _data });
 };
 // 使用示例
 // var input = document.querySelector('input[type="file"]');
 // request.file('/user', { file: input.files[0], params: { userName: 'user' } });
 
-export { isomorphicFetch as fetch, baseRequest };
-
+export { isomorphicFetch as fetch };
 export default request;
