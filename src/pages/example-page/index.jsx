@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { fetch } from '@/request';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import Error from '@/components/Error';
 import singleton from '@/hocComs/singleton';
+
+import SignatureCanvas from 'react-signature-canvas';
 
 import STYLES from './index.module.less';
 
@@ -11,20 +13,33 @@ const TestCom = () => {
 };
 
 export default function ExamplePage(props) {
-  console.log('props', props);
+  const signRef = useRef(null);
+  const [imageData, setImageData] = useState('');
+
+  const canvasToImg = () => {
+    if (signRef.current) {
+      const base64Url = signRef.current.toDataURL();
+      setImageData(base64Url);
+    }
+  };
+
   return (
     <ErrorBoundary>
       <div className={STYLES.wrap}>
         <div className={STYLES.box}>
           <div className={STYLES.left}>
             <div className={STYLES.active}></div>
-            {singleton(<TestCom></TestCom>)}
-            {singleton(<TestCom></TestCom>)}
           </div>
           <div className={STYLES.search}></div>
           <div className={STYLES.right}></div>
         </div>
-        <Error></Error>
+        <SignatureCanvas
+          ref={signRef}
+          penColor="black"
+          canvasProps={{ style: { border: '1px solid black', background: '#fff' }, width: 500, height: 200, className: 'sigCanvas' }}
+        />
+        <img src={imageData} alt="" />
+        <button onClick={canvasToImg}>ToImage</button>
         <button
           onClick={() => {
             singleton.destroy();

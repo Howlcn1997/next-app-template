@@ -25,7 +25,8 @@ module.exports = withBundleAnalyzer(
             localIdentName: '[local]__[hash:base64:5]',
             getLocalIdent: (context, localIdentName, localName, options) => {
               const hz = context.resourcePath.replace(context.rootContext, '');
-              if (/node_modules/.test(hz)) {
+              // global.css 不参与cssModule
+              if (/node_modules/.test(hz) || !/\.module\.*$/.test(hz)) {
                 return localName;
               }
               return cssLoaderGetLocalIdent(context, localIdentName, localName, options);

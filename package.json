@@ -34,7 +34,8 @@
     "next-transpile-modules": "^4.1.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-signature-canvas": "^1.0.3"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.10.5",
